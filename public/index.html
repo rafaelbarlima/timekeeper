@@ -24,7 +24,25 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      integrity="sha256-9mbkOfVho3ZPXfM7W8sV2SndrGDuh7wuyLjtsWeTI1Q="
+      crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+      integrity="sha256-t8GepnyPmw9t+foMh3mKNvcorqNHamSKtKRxxpUEgFI="
+      crossorigin="anonymous"
+    ></script>
+    
+    <title>WKM - TimeKeeper</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -40,4 +58,124 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <script>
+    $('#filtro')
+      .dropdown()
+    ;
+
+    $('#cronometro')
+       .popup({
+      inline     : true,
+      hoverable  : true,
+      position   : 'bottom left',
+      lastResort: 'bottom left',
+      delay: {
+        show: 300,
+        hide: 800
+      }
+      })
+    ;
+
+    $('#cardsuteis')
+       .popup({
+      inline     : true,
+      hoverable  : true,
+      position   : 'bottom left',
+      lastResort: 'bottom left',
+      delay: {
+        show: 300,
+        hide: 800
+      }
+      })
+    ;
+
+    $('#card')
+    .popup({
+      inline     : true,
+      hoverable  : true,
+      position   : 'bottom left',
+      lastResort: 'bottom left',
+      delay: {
+        show: 300,
+        hide: 800
+      }
+      })
+    ;
+
+    
+    var sw = {
+      /* [INIT] */
+      etime : null, // holds HTML time display
+      erst : null, // holds HTML reset button
+      ego : null, // holds HTML start/stop button
+      timer : null, // timer object
+      now : 0, // current timer
+      init : function () {
+        // Get HTML elements
+        sw.etime = document.getElementById("sw-time");
+        sw.erst = document.getElementById("sw-rst");
+        sw.ego = document.querySelector("#sw-go");
+
+        // Attach listeners
+        sw.erst.addEventListener("click", sw.reset);
+        sw.erst.disabled = false;
+        sw.ego.addEventListener("click", sw.start);
+        sw.ego.disabled = false;
+      },
+
+      /* [ACTIONS] */
+      tick : function () {
+      // tick() : update display if stopwatch running
+
+        // Calculate hours, mins, seconds
+        sw.now++;
+        var remain = sw.now;
+        var hours = Math.floor(remain / 3600);
+        remain -= hours * 3600;
+        var mins = Math.floor(remain / 60);
+        remain -= mins * 60;
+        var secs = remain;
+
+        // Update the display timer
+        if (hours<10) { hours = "0" + hours; }
+        if (mins<10) { mins = "0" + mins; }
+        if (secs<10) { secs = "0" + secs; }
+        sw.etime.innerHTML = hours + ":" + mins + ":" + secs;
+      },
+
+      start : function () {
+      // start() : start the stopwatch
+
+        sw.timer = setInterval(sw.tick, 1000);
+        sw.ego.value = "Stop";
+        sw.ego.removeEventListener("click", sw.start);
+        sw.ego.addEventListener("click", sw.stop);
+      },
+
+      stop  : function () {
+      // stop() : stop the stopwatch
+
+        clearInterval(sw.timer);
+        sw.timer = null;
+        sw.ego.value = "Start";
+        sw.ego.removeEventListener("click", sw.stop);
+        sw.ego.addEventListener("click", sw.start);
+      },
+
+      reset : function () {
+      // reset() : reset the stopwatch
+
+        // Stop if running
+        if (sw.timer != null) { sw.stop(); }
+
+        // Reset time
+        sw.now = -1;
+        sw.tick();
+      }
+    };
+
+    window.addEventListener("load", sw.init);
+
+
+  </script>
 </html>

@@ -1,0 +1,12 @@
+
+#stopwatch {
+    max-width: 250px;
+  }
+  
+  .esconder{
+      display:none !important;
+  }
+
+  #sw-rst{
+      display:none;
+  }

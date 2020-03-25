@@ -1,38 +1,70 @@
-.App {
-  text-align: center;
+.maior-input{
+  width: 40% !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+button{
+  background: none;
+  border:none;
+  border-radius: 50%;
+  outline: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.animation:hover{
+  transform: scale(1.2);
+  cursor: pointer;
+  transition: 0.2s all;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.ui.button:hover .play{
+  transform: scale(1.2);
+  cursor: pointer;
+  transition: 0.2s all;
 }
 
-.App-link {
-  color: #61dafb;
+.ui.button:hover .edit{
+  transform: scale(1.2);
+  cursor: pointer;
+  transform: 0.2s all;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ui.button:hover .trash{
+  transform: scale(1.2);
+  cursor: pointer;
+  transform: 0.2s all;
+}
+
+
+.angle:hover{
+  transform: scale(1.2);
+  cursor: pointer;
+  transform: 1s all;
+}
+
+.corHorario{
+  color: cadetblue !important;
+}
+
+.content{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.content.center.aligned{
+	justify-content: center;
+}
+
+.dados{
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	max-width: 70%;
+}
+
+.botoes{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: flex-end;
+	flex-shrink: 1;
+	width: 30%;	
 }
