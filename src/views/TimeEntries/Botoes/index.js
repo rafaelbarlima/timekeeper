@@ -1,5 +1,4 @@
 import React from 'react';
-import UiButton from '../Botao/UiButton.js';
 
 class Botoes extends React.Component{
 
@@ -7,19 +6,19 @@ class Botoes extends React.Component{
         return(
             <div className="botoes"> {/*\ 1 Evento - GET\*/}
                 <span className="right floated mini ui">
-                    <UiButton className="basic green" title="Continuar atividade">
+                    <div className="ui button basic green" title="Continuar atividade">
                         <i className="play icon"></i>
-                    </UiButton>
+                    </div>
                 </span>
                 <span className="right floated mini ui"> {/*\ 1 Evento - PUT/PATCH\*/}
-                    <UiButton className="basic orange" title="Editar atividade">
+                    <div className="ui button basic orange" title="Editar atividade">
                         <i className="edit icon"></i>
-                    </UiButton>
+                    </div>
                 </span>
                 <span className="right floated mini ui"> {/*\ 1 Evento - DELETE\*/}
-                    <UiButton className="basic red" title="Excluir atividade">
+                    <div className="ui button basic red" title="Excluir atividade">
                         <i className="trash icon"></i>
-                    </UiButton>
+                    </div>
                 </span>
             </div>
         );

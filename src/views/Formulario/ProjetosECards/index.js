@@ -1,13 +1,16 @@
 import React from 'react';
-import axios from 'axios';
 
-class Input extends React.Component{
+class ProjetosECards extends React.Component{
 
-    state = {valor: ""}
+    state = {
+        valor: "",
+    }
 
     onInputPress = (event) =>{
         if (event.key === 'Enter'){
             this.setState({valor: event.target.value});
+            this.props.gravaCard(this.state.valor);
+            // console.log("Component Input" + this.state.valor);
         }
         {/*\Fazer Depois o axios.get\*/}
     }
@@ -15,9 +18,11 @@ class Input extends React.Component{
     render(){
         return(
             <div className="ui left corner labeled input">
-                <input type="text" maxLength={this.props.numeroCaracteres} onKeyPress={this.props.id != null? this.onInputPress : null} />
-                <div className={this.props.classe} id={this.props.id}>
-                    <i className={this.props.classeIcone}></i>
+
+                <input type="text" maxLength="15" onKeyPress={this.onInputPress} />
+
+                <div className="ui left corner label" id="card">
+                    <i className="asterisk icon"></i>
                 </div>
 
                 
@@ -41,4 +46,4 @@ class Input extends React.Component{
 
 
 
-export default Input;
+export default ProjetosECards;

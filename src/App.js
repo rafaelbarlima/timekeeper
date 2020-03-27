@@ -1,54 +1,49 @@
 import React from 'react';
 import './App.css';
-import Container from './Componentes/Container.js';
-import Formulario from './Componentes/Menu/Formulario.js';
-import UiButton from './Componentes/Botao/UiButton.js';
-import CardsUteis from './Componentes/Filtros/CardsUteis.js';
-import FiltroPeriodo from './Componentes/Filtros/FiltroPeriodo.js';
-import Cards from './Componentes/Main/Cards.js';
-import Content from './Componentes/Main/Content.js';
-import UiLabel from './Componentes/Main/UiLabel.js';
-import Dados from './Componentes/Main/Dados.js';
-import Botoes from './Componentes/Main/Botoes.js';
+import Formulario from './views/Formulario/index.js';
+import CardsUteis from './views/FiltrosECardsUteis/CardsUteis/index.js';
+import FiltroPeriodo from './views/FiltrosECardsUteis/FiltroPeriodo/index.js';
+import Dados from './views/TimeEntries/Dados/index.js';
+import Botoes from './views/TimeEntries/Botoes/index.js';
 
 class App extends React.Component {
- 
+
   render(){
     return (
       <div>
-        <Container>
-          <Formulario />    { /*\ 3 Eventos - CARDS, PROJETOS E ATIVIDADES\*/ }
-        </Container>
+        <div>
+          <Formulario />   
+        </div>
   
-        <Container>
-          <UiButton  id="cardsuteis">
-            <CardsUteis />
-          </UiButton>
-          <UiButton className="labeled icon top center pointing dropdown" id="filtro">
-            <FiltroPeriodo />
-          </UiButton>
-        </Container>
+        <div>
+          <CardsUteis />
+          <FiltroPeriodo />
+        </div>
   
-        <Container className="ui container">
+        <div className="ui container">
           <main className="ui one cards">
-            <Cards>
-              <Content className="center aligned">
-                <UiLabel conteudo="Sexta, 13 de Março"/>
-              </Content>
-              <Content>
+            <div className="card">
+              <div className="content center aligned">
+                <div className="ui label">
+                  <span>Sexta, 13 de Março</span>
+                </div>
+              </div>
+              <div className="content">
                 <Dados/>
-                <Botoes /> {/*\ 3 Eventos - Atividades \*/}
-              </Content>
-              <Content className="center aligned">
-                <UiLabel conteudo="Total de horas: 1:47:00"/>
-              </Content>
-            </Cards>
+                <Botoes />
+              </div>
+              <div className="content center aligned">
+                <div className="ui label">
+                    <span>Total de horas: 1:47:00</span>
+                </div>
+              </div>
+            </div>
           </main>
-        </Container>
+        </div>
 
-        <Container className="ui center aligned basic segment">
-          <UiButton className="blue basic" conteudo="Carregar Mais"/>
-        </Container>
+        <div className="ui center aligned basic segment">
+          <button className="ui blue basic button">Carregar mais</button>
+        </div>
       </div>
     );
   }

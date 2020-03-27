@@ -106,21 +106,20 @@
     var sw = {
       /* [INIT] */
       etime : null, // holds HTML time display
-      erst : null, // holds HTML reset button
       ego : null, // holds HTML start/stop button
       timer : null, // timer object
       now : 0, // current timer
       init : function () {
         // Get HTML elements
         sw.etime = document.getElementById("sw-time");
-        sw.erst = document.getElementById("sw-rst");
-        sw.ego = document.querySelector("#sw-go");
+        sw.ego = document.querySelectorAll(".sw-go");      /*[0], [1], [2]*/
 
         // Attach listeners
-        sw.erst.addEventListener("click", sw.reset);
-        sw.erst.disabled = false;
-        sw.ego.addEventListener("click", sw.start);
-        sw.ego.disabled = false;
+        for(var i = 0; i <= 1; i++){
+          sw.ego[i].addEventListener("click", sw.start);
+          sw.ego[i].disabled = false;
+        }
+        
       },
 
       /* [ACTIONS] */
@@ -147,9 +146,12 @@
       // start() : start the stopwatch
 
         sw.timer = setInterval(sw.tick, 1000);
-        sw.ego.value = "Stop";
-        sw.ego.removeEventListener("click", sw.start);
-        sw.ego.addEventListener("click", sw.stop);
+        //sw.ego[0].value = "Stop";
+        for(var j = 0; j <= 2; j++){
+          sw.ego[j].removeEventListener("click", sw.start);
+          sw.ego[j].addEventListener("click", sw.stop);
+        }
+        
       },
 
       stop  : function () {
@@ -157,20 +159,12 @@
 
         clearInterval(sw.timer);
         sw.timer = null;
-        sw.ego.value = "Start";
-        sw.ego.removeEventListener("click", sw.stop);
-        sw.ego.addEventListener("click", sw.start);
-      },
-
-      reset : function () {
-      // reset() : reset the stopwatch
-
-        // Stop if running
-        if (sw.timer != null) { sw.stop(); }
-
-        // Reset time
-        sw.now = -1;
-        sw.tick();
+        //sw.ego.value = "Start";
+        for(var k = 0; k <= 2; k++){
+          sw.ego[k].removeEventListener("click", sw.stop);
+          sw.ego[k].addEventListener("click", sw.start);
+        }
+        
       }
     };
 

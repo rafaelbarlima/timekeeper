@@ -5,7 +5,7 @@ class FiltroPeriodo extends React.Component{
 
     render(){
         return(
-            <React.Fragment>
+            <div className="ui button labeled icon top center pointing dropdown" id="filtro">
                 <i className="filter icon"></i>
                 <span className="text">Filtrar por periodo</span>
                 <div className="menu">
@@ -26,7 +26,7 @@ class FiltroPeriodo extends React.Component{
                         Esse Ano
                     </div>
                 </div>
-            </React.Fragment>
+            </div>
         );
     }
 }
