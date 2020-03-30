@@ -1,0 +1,27 @@
+form {
+    position: relative;
+}
+
+form .ui.form{
+    margin-bottom: 0;
+} 
+
+.display{
+    display: none;
+}
+
+.menuFlutuante{
+    
+    position: absolute;
+    left:0;
+    background: cadetblue;
+    padding: 5px 10px;
+    z-index: 100;
+    height: 50px;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+}
+
+.espacamento-esquerda{
+    margin-left: 25px;
+}

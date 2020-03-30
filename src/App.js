@@ -3,9 +3,7 @@ import './App.css';
 import Formulario from './views/Formulario/index.js';
 import CardsUteis from './views/FiltrosECardsUteis/CardsUteis/index.js';
 import FiltroPeriodo from './views/FiltrosECardsUteis/FiltroPeriodo/index.js';
-import Dados from './views/TimeEntries/Dados/index.js';
-import Botoes from './views/TimeEntries/Botoes/index.js';
-import axios from 'axios';
+import TimeEntries from './views/TimeEntries/index.js';
 
 class App extends React.Component {
 
@@ -23,22 +21,7 @@ class App extends React.Component {
   
         <div className="ui container">
           <main className="ui one cards">
-            <div className="card">
-              <div className="content center aligned">
-                <div className="ui label">
-                  <span>Sexta, 13 de Março</span>
-                </div>
-              </div>
-              <div className="content">
-                <Dados/>
-                <Botoes />
-              </div>
-              <div className="content center aligned">
-                <div className="ui label">
-                    <span>Total de horas: 1:47:00</span>
-                </div>
-              </div>
-            </div>
+            <TimeEntries />
           </main>
         </div>
 
