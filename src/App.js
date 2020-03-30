@@ -5,6 +5,7 @@ import CardsUteis from './views/FiltrosECardsUteis/CardsUteis/index.js';
 import FiltroPeriodo from './views/FiltrosECardsUteis/FiltroPeriodo/index.js';
 import Dados from './views/TimeEntries/Dados/index.js';
 import Botoes from './views/TimeEntries/Botoes/index.js';
+import axios from 'axios';
 
 class App extends React.Component {
 
