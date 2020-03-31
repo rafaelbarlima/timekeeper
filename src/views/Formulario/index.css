@@ -6,22 +6,35 @@ form .ui.form{
     margin-bottom: 0;
 } 
 
-.display{
-    display: none;
-}
 
 .menuFlutuante{
-    
     position: absolute;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 1;
+    flex-wrap: wrap;
     left:0;
-    background: cadetblue;
+    background: whitesmoke;
     padding: 5px 10px;
     z-index: 100;
-    height: 50px;
-    width: 100%;
-    border-bottom: 1px solid lightgray;
+    height: auto;
+    width: auto;
+    border: 1px solid lightgray;
+    border-radius: 5px;
 }
 
-.espacamento-esquerda{
-    margin-left: 25px;
+.displayNone{
+    display:none;
 }
+
+.save:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+    transform: 1s all;
+}
+
+.cancel:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+    transform: 1s all;
+  }
