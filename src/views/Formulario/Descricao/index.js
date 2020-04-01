@@ -9,8 +9,7 @@ class Descricao extends React.Component{
                 <div className="ui left corner label">
                     <i className="keyboard icon"></i>
                 </div>
-                <input type="text" maxLength="1024"/>
-                
+                <input type="text" maxLength="1024" placeholder="Descreva sua atividade"/>
                 
             </div>
             

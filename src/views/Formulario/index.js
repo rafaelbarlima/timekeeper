@@ -7,22 +7,32 @@ import './index.css';
 class Formulario extends React.Component {
 
     state = {
-        projeto: "",
-        card: "",
-        descricao: "",
-        totalTrabalho: "",
-        variavelMenu: false
+        form: {
+            projeto: "",
+            card: "",
+            variavelMenu: false,
+            descricao: "",
+            totalTrabalho: ""
+        },
+        menuFlutuante: {
+            projetoMenu: "",
+            cardMenu: ""
+        }
     }
 
     gravaProjeto = (event) => {
-        this.setState({ projeto: event.target.value });
+        var menuFlutuante = this.state.menuFlutuante;
+        var projetoEscolhido = event.target.value;
+        menuFlutuante.projetoMenu = projetoEscolhido;
+        this.setState({ menuFlutuante: menuFlutuante });
     }
 
     gravaCard = (event) => {
-        this.setState({ card: event.target.value });
+        var menuFlutuante = this.state.menuFlutuante;
+        var cardEscolhido = event.target.value;
+        menuFlutuante.cardMenu = cardEscolhido;
+        this.setState({ menuFlutuante: menuFlutuante });
     }
-
-
 
     exibeMenuFlutuante = (valor) => {
         this.setState({ variavelMenu: valor });
@@ -49,12 +59,16 @@ class Formulario extends React.Component {
 
     onSaveClick = () => {
         this.setState({ variavelMenu: false });
+        var form = this.state.form;
+        form.projeto = this.state.menuFlutuante.projetoMenu;
+        form.card = this.state.menuFlutuante.cardMenu;
+        this.setState({ form: form });
     }
 
     onCancelClick = () => {
         this.setState({ variavelMenu: false });
-        this.setState({ projeto: "" });
-        this.setState({ card: "" });
+        this.setState({ projetoMenu: "" });
+        this.setState({ cardMenu: "" });
     }
 
     menuFlutuante = (e) => {
@@ -62,20 +76,18 @@ class Formulario extends React.Component {
         if (this.state.variavelMenu === true) {
 
             return (
-                <div className="ui menuFlutuante">
-                    <div className="ui labeled right icon input loading">
+                <div className="ui menuFlutuante" >
+                    <div className="ui labeled right icon input" method="POST" action="">
                         <div className="ui label">
                             Projetos
                         </div>
                         <input type="text" onChange={this.gravaProjeto} />
-                        <i className="search icon"></i>
                     </div>
-                    <div className="ui labeled right icon input">
+                    <div className="ui labeled right icon input" method="POST" action="">
                         <div className="ui label">
                             Cards
                         </div>
                         <input type="text" onChange={this.gravaCard} />
-                        <i className="search icon"></i>
                     </div>
                     <button type="submit" onClick={this.onSaveClick}>
                         <i className="green icon save" title="Salvar Opções"></i>
@@ -97,7 +109,9 @@ class Formulario extends React.Component {
             <form onSubmit={this.onFormSubmit} method="POST" action="" id="formularioId">
                 <div className="ui form five menu item borderless large">
                     <div className="item">
-                        <ProjetosECards exibeMenuFlutuante={this.exibeMenuFlutuante} />
+                        <ProjetosECards exibeMenuFlutuante={this.exibeMenuFlutuante}
+                            projeto={this.state.form.projeto}
+                            card={this.state.form.card} />
                     </div>
                     <div className="item maior-input">
                         <Descricao gravaDescricao={this.gravaDescricao} />

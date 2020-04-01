@@ -38,3 +38,9 @@ form .ui.form{
     cursor: pointer;
     transform: 1s all;
   }
+
+div i.search:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+    transform: 1s all;
+}
