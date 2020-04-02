@@ -133,7 +133,7 @@
 
         sw.timer = setInterval(sw.tick, 1000);
         //sw.ego[0].value = "Stop";
-        for(var j = 0; j <= 2; j++){
+        for(var j = 0; j <= 1; j++){
           sw.ego[j].removeEventListener("click", sw.start);
           sw.ego[j].addEventListener("click", sw.stop);
         }
@@ -147,7 +147,7 @@
         sw.timer = null;
         //sw.ego.value = "Start";
         for(var k = 0; k <= 2; k++){
-          sw.ego[k].removeEventListener("click", sw.stop);
+         // sw.ego[k].removeEventListener("click", sw.stop);
           sw.ego[k].addEventListener("click", sw.start);
         }
         

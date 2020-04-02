@@ -3,11 +3,6 @@ import './index.css';
 
 class ProjetosECards extends React.Component {
 
-    state = {
-        valor: "",
-        x: false
-    }
-
     funcionExibirMenuFlutuante = () => {
         this.props.exibeMenuFlutuante(true);
     };
@@ -19,8 +14,8 @@ class ProjetosECards extends React.Component {
                     <i className="asterisk icon"></i>
                 </div>
                 <div className="ui selection fluid dropdown" >
-                    <button type="hidden">
-                        <span className="opacidade espaco-esquerda" placeholder="">Projeto</span>
+                    <button type="button">
+                        <span className="opacidade espaco-esquerda" placeholder="">Projetos</span>
                     </button> 
                     <i className="dropdown icon"></i>
                 </div>
@@ -36,7 +31,7 @@ class ProjetosECards extends React.Component {
                     <i className="green save icon"></i>
                 </div>
                 <div className="ui selection fluid dropdown" >
-                    <button type="hidden" className="espaco-esquerda">
+                    <button type="button" className="espaco-esquerda">
                         <span>[{this.props.projeto}, </span>
                         <span>{this.props.card}]</span>
                     </button>

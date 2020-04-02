@@ -10,17 +10,30 @@ class Formulario extends React.Component {
         form: {
             projeto: "",
             card: "",
-            variavelMenu: false,
             descricao: "",
-            totalTrabalho: ""
+            tempoTrabalhado: 0,
+            data: {
+                dia: "",
+                diaDaSemana: "",
+                mes: "",
+                ano: ""
+            },
+            hora: 0,
+            minuto: 0,
+            segundo: 0
         },
         menuFlutuante: {
+            variavelMenu: false,
             projetoMenu: "",
             cardMenu: ""
         }
     }
 
     gravaProjeto = (event) => {
+        var exibirLista = document.querySelector("#divListaProjeto");
+        if (exibirLista.classList.contains("displayNone")) {
+            exibirLista.classList.remove("displayNone");
+        }
         var menuFlutuante = this.state.menuFlutuante;
         var projetoEscolhido = event.target.value;
         menuFlutuante.projetoMenu = projetoEscolhido;
@@ -28,20 +41,29 @@ class Formulario extends React.Component {
     }
 
     gravaCard = (event) => {
+        var exibirLista = document.querySelector("#divListaCard");
+        if (exibirLista.classList.contains("displayNone")) {
+            exibirLista.classList.remove("displayNone");
+        }
         var menuFlutuante = this.state.menuFlutuante;
         var cardEscolhido = event.target.value;
         menuFlutuante.cardMenu = cardEscolhido;
         this.setState({ menuFlutuante: menuFlutuante });
     }
 
-    exibeMenuFlutuante = (valor) => {
-        this.setState({ variavelMenu: valor });
-
-        //O primeiro valor a aparecer é false, depois é true.
+    gravaDescricao = (valor) => {
+        var form = this.state.form;
+        form.descricao = valor;
+        this.setState({ form: form });
     }
 
-    gravaDescricao = (valor) => {
-        this.setState({ descricao: valor });
+    gravaValoresDoCronometro = (horaTrabalhada, data, horarioInicio) => {
+        var form = this.state.form;
+        var data = this.state.form.data;
+        
+        form.tempoTrabalhado = horaTrabalhada;
+        form.horarioInicio = horarioInicio;
+        this.setState({ form: form });
     }
 
     onFormSubmit(event) {
@@ -49,57 +71,97 @@ class Formulario extends React.Component {
     }
 
     onPlayClick = (event) => {
-
         var iconePlay = document.querySelector("#iconePlay");
         var iconeEscondido = document.querySelector(".esconder");
+        var form = this.state.form;
 
         iconePlay.classList.add("esconder");
         iconeEscondido.classList.remove("esconder");
-    }
 
-    onSaveClick = () => {
-        this.setState({ variavelMenu: false });
-        var form = this.state.form;
-        form.projeto = this.state.menuFlutuante.projetoMenu;
-        form.card = this.state.menuFlutuante.cardMenu;
+        form.hora = new Date().getHours();
+        form.minuto = new Date().getMinutes();
+        form.segundo = new Date().getSeconds();
+
+        console.log(form);
         this.setState({ form: form });
     }
 
-    onCancelClick = () => {
-        this.setState({ variavelMenu: false });
-        this.setState({ projetoMenu: "" });
-        this.setState({ cardMenu: "" });
+    onSaveClick = () => {
+        var form = this.state.form;
+        var menuFlutuante = this.state.menuFlutuante;
+
+        menuFlutuante.variavelMenu = false;
+        form.projeto = this.state.menuFlutuante.projetoMenu;
+        form.card = this.state.menuFlutuante.cardMenu;
+        this.setState({ form: form });
+        this.setState({ menuFlutuante: menuFlutuante });
     }
 
-    menuFlutuante = (e) => {
+    onCancelClick = () => {
+        var menuFlutuante = this.state.menuFlutuante;
+        menuFlutuante.variavelMenu = false;
+        menuFlutuante.projetoMenu = "";
+        menuFlutuante.cardMenu = "";
+        this.setState({ menuFlutuante: menuFlutuante });
+    }
 
-        if (this.state.variavelMenu === true) {
+    exibeMenuFlutuante = (valor) => {
+        var menuFlutuante = this.state.menuFlutuante;
+        menuFlutuante.variavelMenu = valor;
+        this.setState({ menuFlutuante: menuFlutuante });
+
+    }
+
+    menuFlutuante = () => {
+
+        if (this.state.menuFlutuante.variavelMenu === true) {
 
             return (
-                <div className="ui menuFlutuante" >
-                    <div className="ui labeled right icon input" method="POST" action="">
+                <div className="ui menuFlutuante">
+                    <div className="ui labeled right icon input" >
                         <div className="ui label">
                             Projetos
                         </div>
                         <input type="text" onChange={this.gravaProjeto} />
+                        <div className="ui vertical menu displayNone listaFlutuante" id="divListaProjeto">
+                            <a className="active teal item">
+                                GoCup
+                            </a>
+                            <a className="active teal item">
+                                PreviFamilia
+                            </a>
+                            <a className="active teal item">
+                                Tribunal
+                            </a>
+                        </div>
                     </div>
-                    <div className="ui labeled right icon input" method="POST" action="">
+                    <div className="ui labeled right icon input" >
                         <div className="ui label">
                             Cards
                         </div>
                         <input type="text" onChange={this.gravaCard} />
+                        <div className="ui vertical menu displayNone listaFlutuante" id="divListaCard">
+                            <a className="active teal item">
+                                Inbox
+                            </a>
+                            <a className="active teal item">
+                                Spam
+                            </a>
+                            <a className="active teal item">
+                                Updates
+                            </a>
+                        </div>
                     </div>
-                    <button type="submit" onClick={this.onSaveClick}>
+                    <button type="button" onClick={this.onSaveClick}>
                         <i className="green icon save" title="Salvar Opções"></i>
                     </button>
-                    <button onClick={this.onCancelClick}>
+                    <button type="button" onClick={this.onCancelClick}>
                         <i className="red icon cancel" title="Fechar Menu"></i>
                     </button>
 
                 </div>
             );
         }
-
     }
 
     render() {
@@ -108,6 +170,7 @@ class Formulario extends React.Component {
 
             <form onSubmit={this.onFormSubmit} method="POST" action="" id="formularioId">
                 <div className="ui form five menu item borderless large">
+
                     <div className="item">
                         <ProjetosECards exibeMenuFlutuante={this.exibeMenuFlutuante}
                             projeto={this.state.form.projeto}
@@ -117,7 +180,10 @@ class Formulario extends React.Component {
                         <Descricao gravaDescricao={this.gravaDescricao} />
                     </div>
                     <div className="item right aligned">
-                        <Cronometro />
+                        <Cronometro gravaValoresDoCronometro={this.gravaValoresDoCronometro}
+                            hora={this.state.form.hora}
+                            minuto={this.state.form.minuto}
+                            segundo={this.state.form.segundo} />
                     </div>
                     <div className="item right aligned">
                         <i className="green play circle icon big animation sw-go" onClick={this.onPlayClick} title="Iniciar cronômetro" id="iconePlay"></i>

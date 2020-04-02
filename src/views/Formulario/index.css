@@ -6,7 +6,6 @@ form .ui.form{
     margin-bottom: 0;
 } 
 
-
 .menuFlutuante{
     position: absolute;
     display: flex;
@@ -24,7 +23,7 @@ form .ui.form{
 }
 
 .displayNone{
-    display:none;
+    display:none !important;
 }
 
 .save:hover{
@@ -43,4 +42,19 @@ div i.search:hover{
     transform: scale(1.2);
     cursor: pointer;
     transform: 1s all;
+}
+
+.listaFlutuante{
+    position: absolute;
+    right: 0;
+    top: 30px;
+    background: whitesmoke;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+}
+
+.active.teal.item:hover{
+    transform: scale(1.05);
 }
