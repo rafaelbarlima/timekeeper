@@ -1,6 +1,5 @@
 import React from 'react';
 import InfiniteCalendar from 'react-infinite-calendar';
-import { format } from 'react-string-format';
 import 'react-infinite-calendar/styles.css';
 import './Cronometro.css';
 
@@ -16,18 +15,22 @@ class Cronometro extends React.Component {
         tempoCronometro: 0
     }
 
+    valoresData = () => {
+        this.props.gravaValoresDoCronometro(this.state.data);
+    }
+
     render() {
         var today = new Date();
-        var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
-        var lastMonth = new Date(today.getMonth() - 4);
+        //var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+        var lastMonth = new Date(today.getMonth() - 2);
 
         return (
-            <div>
+            <React.Fragment>
                 <div id="cronometro" >
                     <div id="sw-time">00:00:00</div>
                 </div>
-                <div className="ui fluid popup">
-                    <div className="ui grid">
+                <div className="ui  popup">
+                    <div className="ui fluid grid">
                         <div className="two column row">
                             <div className="column">Início</div>
                             <div className="column">Término</div>
@@ -36,11 +39,11 @@ class Cronometro extends React.Component {
                             <input className="column ui labed input" type="text" placeholder={(this.props.hora + ":" + this.props.minuto + ":" + this.props.segundo)} />
                             <input className="column" type="text" placeholder="5:29PM" />
                         </div>
-                        <div className="one centered column row">
+                        <div className="one centered column row" onClick={this.valoresData}>
                             <InfiniteCalendar
                                 width={400}
                                 height={200}
-                                selected={today}
+                                selected={false}
                                 min={new Date(2020, lastMonth, 1)}
                                 max={new Date()}
                                 maxDate={new Date()}
@@ -66,7 +69,8 @@ class Cronometro extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>
+                
+            </React.Fragment>
         );
     }
 }

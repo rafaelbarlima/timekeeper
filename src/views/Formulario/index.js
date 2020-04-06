@@ -3,6 +3,7 @@ import ProjetosECards from './ProjetosECards/index.js';
 import Descricao from './Descricao/index.js';
 import Cronometro from './Cronometro/index.js';
 import './index.css';
+import axios from 'axios';
 
 class Formulario extends React.Component {
 
@@ -36,7 +37,12 @@ class Formulario extends React.Component {
         }
         var menuFlutuante = this.state.menuFlutuante;
         var projetoEscolhido = event.target.value;
-        menuFlutuante.projetoMenu = projetoEscolhido;
+        
+        axios.get("http://localhost:3001/api-timekeeper/projetos/" + projetoEscolhido)
+        .then(resposta => {
+            menuFlutuante.projetoMenu = resposta.data.nome;
+        });
+
         this.setState({ menuFlutuante: menuFlutuante });
     }
 
@@ -47,6 +53,12 @@ class Formulario extends React.Component {
         }
         var menuFlutuante = this.state.menuFlutuante;
         var cardEscolhido = event.target.value;
+
+        axios.get("http://localhost:3001/api-timekeeper/cards/" + cardEscolhido)
+        .then(resposta => {
+            menuFlutuante.cardMenu = resposta.data.key;
+        });
+
         menuFlutuante.cardMenu = cardEscolhido;
         this.setState({ menuFlutuante: menuFlutuante });
     }
@@ -57,17 +69,20 @@ class Formulario extends React.Component {
         this.setState({ form: form });
     }
 
-    gravaValoresDoCronometro = (horaTrabalhada, data, horarioInicio) => {
+    gravaValoresDoCronometro = (dataParametro) => {
         var form = this.state.form;
-        var data = this.state.form.data;
-        
-        form.tempoTrabalhado = horaTrabalhada;
-        form.horarioInicio = horarioInicio;
+        form.data = dataParametro;
         this.setState({ form: form });
     }
 
-    onFormSubmit(event) {
+    onFormSubmit = (event) => {
         event.preventDefault();
+        var form = this.state.form;
+        var tempoDeTrabalho = document.querySelector("#sw-time").textContent;
+        form.tempoTrabalhado = tempoDeTrabalho;
+        this.setState({ form : form});
+        console.log(this.state.form);
+
     }
 
     onPlayClick = (event) => {
@@ -82,7 +97,7 @@ class Formulario extends React.Component {
         form.minuto = new Date().getMinutes();
         form.segundo = new Date().getSeconds();
 
-        console.log(form);
+        
         this.setState({ form: form });
     }
 
@@ -119,18 +134,18 @@ class Formulario extends React.Component {
             return (
                 <div className="ui menuFlutuante">
                     <div className="ui labeled right icon input" >
-                        <div className="ui label">
+                        <div className="ui label" href="">
                             Projetos
                         </div>
                         <input type="text" onChange={this.gravaProjeto} />
                         <div className="ui vertical menu displayNone listaFlutuante" id="divListaProjeto">
-                            <a className="active teal item">
+                            <a className="active teal item" href="#">
                                 GoCup
                             </a>
-                            <a className="active teal item">
+                            <a className="active teal item" href="#">
                                 PreviFamilia
                             </a>
-                            <a className="active teal item">
+                            <a className="active teal item" href="#">
                                 Tribunal
                             </a>
                         </div>
@@ -141,13 +156,13 @@ class Formulario extends React.Component {
                         </div>
                         <input type="text" onChange={this.gravaCard} />
                         <div className="ui vertical menu displayNone listaFlutuante" id="divListaCard">
-                            <a className="active teal item">
+                            <a className="active teal item" href="#">
                                 Inbox
                             </a>
-                            <a className="active teal item">
+                            <a className="active teal item" href="#">
                                 Spam
                             </a>
-                            <a className="active teal item">
+                            <a className="active teal item" href="#">
                                 Updates
                             </a>
                         </div>
